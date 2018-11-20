@@ -1,0 +1,53 @@
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', inputStdin => {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', _ => {
+    inputString = inputString.replace(/\s*$/, '')
+        .split('\n')
+        .map(str => str.replace(/\s*$/, ''));
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+// Complete the aVeryBigSum function below.
+function aVeryBigSum(ar, arCount) {
+
+     
+    var sum = 0; 
+    var arr = ar.map(Number);
+    console.log(arr);
+    console.log(arCount);
+    for (var i = 0; i < arCount; i++){
+        sum += arr[i];
+    }
+    return sum;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const arCount = parseInt(readLine(), 10);
+
+    const ar = readLine().split(' ').map(arTemp => parseInt(arTemp, 10));
+
+    let result = aVeryBigSum(ar, arCount);
+
+    ws.write(result + "\n");
+
+    ws.end();
+}
